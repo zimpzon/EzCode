@@ -9,7 +9,7 @@ namespace EzCode
         {
             string s =
 @"
-    int Squared2(int n)
+int Squared(int n)
 {
   return n * n;
 }
