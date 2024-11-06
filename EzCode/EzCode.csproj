@@ -20,4 +20,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Features" Version="4.11.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EzCodeProblems\EzCodeProblems.csproj" />
+  </ItemGroup>
+
 </Project>
