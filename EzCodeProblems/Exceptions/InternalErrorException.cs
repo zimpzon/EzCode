@@ -1,4 +1,4 @@
-﻿namespace EzCode.Exceptions
+﻿namespace EzCodeProblems.Exceptions
 {
     public class InternalErrorException : Exception
     {
