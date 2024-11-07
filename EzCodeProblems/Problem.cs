@@ -1,50 +1,53 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
-using System.Text.Json;
+﻿using Microsoft.CodeAnalysis;
 using EzCodeProblems.Exceptions;
 
 namespace EzCodeProblems
 {
     public abstract class Problem
     {
-        public class Verification
+        public enum ProblemCategory { Ez, NotSoEz };
+
+        public abstract ProblemCategory Category { get; }
+
+        public abstract string MethodComments { get; }
+
+        public abstract string GetUserFormattedMethod();
+
+        protected string GetUserFormattedMethod(string methodName)
         {
-            public static readonly List<Verification> EmptyList = [];
+            var methodInfo = GetType().GetMethod(methodName) ??
+                throw new MalformedProblemException($"Method name {methodName} does not exist");
 
-            public IReadOnlyList<object> Input { get; init; } = [];
-            public IReadOnlyList<object> Output { get; init; } = [];
+            var parameterList = methodInfo.GetParameters().Select(param => $"{GetPrettyTypeName(param.ParameterType)} {param.Name}");
+            string parameterString = string.Join(", ", parameterList);
+            string sig = $"{GetPrettyTypeName(methodInfo.ReturnType)} {methodInfo.Name}({parameterString})";
 
-            public static List<Verification> CreateList(string json)
-                => string.IsNullOrWhiteSpace(json) ? EmptyList : JsonSerializer.Deserialize<List<Verification>>(json) ?? EmptyList;
+            return $"{MethodComments}\n{sig}\n{{\n    // write your code here\n}}\n";
         }
 
-        public abstract string AsTextWithSolution { get; }
-        public abstract string VerificationsAsJson { get; }
+        private static string GetPrettyTypeName(Type type)
+        {
+            if (type.IsGenericType)
+            {
+                string genericArguments = type.GetGenericArguments()
+                                    .Select(x => TypeCommonName(x.Name))
+                                    .Aggregate((x1, x2) => $"{x1}, {x2}");
+                return $"{type.Name[..type.Name.IndexOf('`')]}" // backtick in generic type names
+                     + $"<{genericArguments}>";
+            }
+            return type.Name;
+        }
 
         /// <summary>
-        /// Takes the text with the full solution and removes the code, returning just the empty method.
+        /// Replace selected names like 'String' with 'string'.
         /// </summary>
-        public string GetProblemTextWithoutSolution()
+        private static string TypeCommonName(string name)
         {
-            var syntaxTree = CSharpSyntaxTree.ParseText(AsTextWithSolution);
-            var root = syntaxTree.GetRoot();
-
-            var localFunctionStatements = root.DescendantNodes().OfType<LocalFunctionStatementSyntax>().ToList();
-            if (localFunctionStatements.Count != 1)
+            return name switch
             {
-                throw new MalformedProblemException($"Problems must contain exactly one function for the user to fill in, actual: {localFunctionStatements.Count}");
-            }
-
-            var function = localFunctionStatements.Single();
-            var functionWithEmptyBody = function.WithBody(null);
-
-            var functionWithEmptyBodyAsString = functionWithEmptyBody.NormalizeWhitespace().ToFullString();
-
-            // We could use Roslyn to add a body containing a comment. Or we can do it the easy way and just add it as a string. Which we will.
-            functionWithEmptyBodyAsString += "\n{\n  // write your solution here\n}";
-
-            return functionWithEmptyBodyAsString;
+                "String" => "string",
+                _ => name,
+            };
         }
     }
 }
