@@ -2,27 +2,20 @@
 @using BlazorMonaco.Editor
 @using MudBlazor
 
-<PageTitle>EzCode</PageTitle>
-<MudText Typo="Typo.h3" GutterBottom="true">EzCode</MudText>
-<MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
-<MudAppBar Color="Color.Primary" Fixed="false">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
-    <MudSpacer />
-    <MudIconButton Icon="@Icons.Custom.FileFormats.FileCode" Color="Color.Inherit" />
-</MudAppBar>
-<MudContainer>
-	<MudGrid>
-		<MudItem xs="2" class="align-content-start">
-			<MudPaper Elevation="1" Outlined="true" class="pa-4">Left
-			</MudPaper>
-		</MudItem>
-		<MudItem xs="10">
-			<MudPaper Elevation="1" Outlined="true" class="pa-4">Right</MudPaper>
-		</MudItem>
-	</MudGrid>
-</MudContainer>
-
-<StandaloneCodeEditor Id="my-editor-id" ConstructionOptions="EditorConstructionOptions" />
+<MudGrid>
+	<MudItem xs="4">
+		Problem list
+		<MudPaper>
+			left
+		</MudPaper>
+	</MudItem>
+	<MudItem xs="8">
+		Code editor
+		<MudPaper>
+			<StandaloneCodeEditor Id="my-editor-id" ConstructionOptions="EditorConstructionOptions" />
+		</MudPaper>
+	</MudItem>
+</MudGrid>
 
 @code {
 	private StandaloneEditorConstructionOptions EditorConstructionOptions(StandaloneCodeEditor editor)

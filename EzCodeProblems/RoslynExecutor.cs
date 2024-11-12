@@ -1,14 +1,29 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis;
-using System.Reflection;
+﻿using System.Reflection;
 using EzCodeProblems.Exceptions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
 
 namespace EzCodeProblems
 {
-    public class RoslynExecutor
+    /// <summary>
+    /// OOOOKAAAAAAY, assembly references in webassembly require some hack (but is doable). Anyways, why not create an AzureFunction?
+    /// 
+    /// total: yes, make a function
+    /// 
+    /// pro:
+    ///     can easily see people using it withou resorting to client side stats
+    ///     no Roslyn hack
+    ///     client/server is a more realistic scenario for learning Blazor
+    ///     
+    /// con:
+    ///     need to run a function
+    ///     it reduces the Blazor code to presentation only. Or is that a pro? Easier to wrap my mind around anyways.
+    ///     
+    /// </summary>
+    public static class RoslynExecutor
     {
-        public async Task<object?> ExecuteCodeAsync(string code, string methodName, params object[] parameters)
+        public static async Task<object?> ExecuteCodeAsync(string code, string methodName, params object[] parameters)
         {
             // Add necessary assemblies and references
             var references = AppDomain.CurrentDomain
