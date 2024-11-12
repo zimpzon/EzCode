@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzCode", "EzCode\EzCode.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzCodeBlazor", "EzCodeBlazor\EzCodeBlazor.csproj", "{86E0E457-A4FD-4D9B-AC7B-F656B5C22241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzCodeProblems", "EzCodeProblems\EzCodeProblems.csproj", "{C6EFB700-0B4B-4578-A947-BE52D485B49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzCodeProblems", "EzCodeProblems\EzCodeProblems.csproj", "{C6EFB700-0B4B-4578-A947-BE52D485B49A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{E25DEF1E-651E-4FF9-A09C-674B3214467B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{E25DEF1E-651E-4FF9-A09C-674B3214467B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzCodeFuncApp", "EzCodeFuncApp\EzCodeFuncApp.csproj", "{F96E0D49-7E70-4CA5-82E7-B72222A4B0F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E25DEF1E-651E-4FF9-A09C-674B3214467B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E25DEF1E-651E-4FF9-A09C-674B3214467B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E25DEF1E-651E-4FF9-A09C-674B3214467B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96E0D49-7E70-4CA5-82E7-B72222A4B0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96E0D49-7E70-4CA5-82E7-B72222A4B0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96E0D49-7E70-4CA5-82E7-B72222A4B0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96E0D49-7E70-4CA5-82E7-B72222A4B0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
